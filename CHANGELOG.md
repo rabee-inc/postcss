@@ -1,6 +1,28 @@
 # Change Log
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## 8.4.11
+* Fixed `Declaration#raws.value` type.
+
+## 8.4.10
+* Fixed `package.funding` URL format.
+
+## 8.4.9
+* Fixed `package.funding` (by Álvaro Mondéjar).
+
+## 8.4.8
+* Fixed end position in empty Custom Properties.
+
+## 8.4.7
+* Fixed `Node#warn()` type (by Masafumi Koba).
+* Fixed comment removal in values after `,`.
+
+## 8.4.6
+* Prevented comment removing when it change meaning of CSS.
+* Fixed parsing space in last semicolon-less CSS Custom Properties.
+* Fixed comment cleaning in CSS Custom Properties with space.
+* Fixed throwing an error on `.root` access for plugin-less case.
+
 ## 8.4.5
 * Fixed `raws` types to make object extendable (by James Garbutt).
 * Moved from Yarn 1 to pnpm.

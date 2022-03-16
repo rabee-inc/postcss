@@ -1,6 +1,6 @@
 {
   "name": "postcss",
-  "version": "8.4.5",
+  "version": "8.4.11",
   "description": "Tool for transforming styles with JS plugins",
   "engines": {
     "node": "^10 || ^12 || >=14"
@@ -57,10 +57,16 @@
     "test": "c8 pnpm unit && eslint . && node ./test/version.js && check-dts && node ./test/integration.js && size-limit",
     "unit": "uvu -r ts-node/register/transpile-only test \"\\.test\\.(ts|js)$\""
   },
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/postcss/"
-  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/postcss"
+    },
+    {
+      "type": "tidelift",
+      "url": "https://tidelift.com/funding/github/npm/postcss"
+    }
+  ],
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
   "homepage": "https://postcss.org/",
@@ -69,37 +75,37 @@
     "url": "https://github.com/postcss/postcss/issues"
   },
   "dependencies": {
-    "nanoid": "^3.1.30",
+    "nanoid": "^3.3.1",
     "picocolors": "^1.0.0",
-    "source-map-js": "^1.0.1"
+    "source-map-js": "^1.0.2"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^46.1.0",
-    "@size-limit/preset-small-lib": "^7.0.4",
+    "@logux/eslint-config": "^46.1.1",
+    "@size-limit/preset-small-lib": "^7.0.8",
     "@types/fs-extra": "^9.0.13",
-    "@types/node": "^17.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
-    "c8": "^7.10.0",
-    "check-dts": "^0.6.5",
-    "clean-publish": "^3.4.4",
+    "@types/node": "^17.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
+    "c8": "^7.11.0",
+    "check-dts": "^0.6.6",
+    "clean-publish": "^4.0.0",
     "concat-with-sourcemaps": "^1.1.0",
-    "eslint": "^8.4.1",
+    "eslint": "^8.11.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prefer-let": "^3.0.1",
-    "eslint-plugin-promise": "^5.2.0",
-    "fs-extra": "^10.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "fs-extra": "^10.0.1",
     "nanodelay": "^1.0.8",
-    "nanospy": "^0.4.0",
-    "postcss-parser-tests": "^8.3.7",
+    "nanospy": "^0.5.0",
+    "postcss-parser-tests": "^8.5.1",
     "simple-git-hooks": "^2.7.0",
-    "size-limit": "^7.0.4",
+    "size-limit": "^7.0.8",
     "strip-ansi": "^6.0.1",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.4",
-    "uvu": "^0.5.2"
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2",
+    "uvu": "^0.5.3"
   },
   "c8": {
     "exclude": [
@@ -107,6 +113,7 @@
       "lib/map-generator.js"
     ],
     "lines": 100,
+    "reporter": "lcov",
     "check-coverage": true
   },
   "simple-git-hooks": {
@@ -130,7 +137,7 @@
   "size-limit": [
     {
       "path": "lib/postcss.js",
-      "limit": "16 KB"
+      "limit": "17 KB"
     }
   ],
   "eslintConfig": {
