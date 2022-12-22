@@ -97,7 +97,7 @@ If you have any new ideas, [PostCSS plugin development] is really easy.
 
 ### Images and Fonts
 
-* [`postcss-assets`] inserts image dimensions and inlines files.
+* [`postcss-url`] postcss plugin to rebase url(), inline or copy asset.
 * [`postcss-sprites`] generates image sprites.
 * [`font-magician`] generates all the `@font-face` rules needed in CSS.
 * [`postcss-inline-svg`] allows you to inline SVG and customize its styles.
@@ -116,7 +116,6 @@ If you have any new ideas, [PostCSS plugin development] is really easy.
 
 ### Other
 
-* [`postcss-rtl`] combines both-directional (left-to-right and right-to-left) styles in one CSS file.
 * [`cssnano`] is a modular CSS minifier.
 * [`lost`] is a feature-rich `calc()` grid system.
 * [`rtlcss`] mirrors styles for right-to-left locales.
@@ -132,11 +131,10 @@ If you have any new ideas, [PostCSS plugin development] is really easy.
 [`postcss-sprites`]:            https://github.com/2createStudio/postcss-sprites
 [`postcss-modules`]:            https://github.com/outpunk/postcss-modules
 [`postcss-sorting`]:            https://github.com/hudochenkov/postcss-sorting
-[`postcss-assets`]:             https://github.com/assetsjs/postcss-assets
 [`font-magician`]:              https://github.com/jonathantneal/postcss-font-magician
 [`autoprefixer`]:               https://github.com/postcss/autoprefixer
 [`cq-prolyfill`]:               https://github.com/ausi/cq-prolyfill
-[`postcss-rtl`]:                https://github.com/vkalinichev/postcss-rtl
+[`postcss-url`]:                https://github.com/postcss/postcss-url
 [`postcss-use`]:                https://github.com/postcss/postcss-use
 [`css-modules`]:                https://github.com/css-modules/css-modules
 [`webp-in-css`]:                https://github.com/ai/webp-in-css
@@ -373,20 +371,6 @@ prefixer({ display: 'flex' }) //=> { display: ['-webkit-box', '-webkit-flex', '-
 [webpack]:      https://webpack.github.io/
 
 
-### Deno
-
-PostCSS also supports [Deno]:
-
-```js
-import postcss from 'https://deno.land/x/postcss/mod.js'
-import autoprefixer from 'https://jspm.dev/autoprefixer'
-
-const result = await postcss([autoprefixer]).process(css)
-```
-
-[Deno]: https://deno.land/
-
-
 ### Runners
 
 * **Grunt**: [`@lodder/grunt-postcss`](https://github.com/C-Lodder/grunt-postcss)
@@ -477,9 +461,9 @@ module.exports = {
 
 ### VS Code
 
-* [`mhmadhamster.postcss-language`] adds PostCSS and SugarSS support.
+* [`csstools.postcss`] adds PostCSS support.
 
-[`mhmadhamster.postcss-language`]: https://marketplace.visualstudio.com/items?itemName=mhmadhamster.postcss-language
+[`csstools.postcss`]: https://marketplace.visualstudio.com/items?itemName=csstools.postcss
 
 
 ### Atom

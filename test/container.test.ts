@@ -636,6 +636,46 @@ test('insertBefore() receives array', () => {
   is(a.toString(), 'a{ color: red; width: 1; height: 2; z-index: 1 }')
 })
 
+test('insertBefore() receives pre-existing child node - a', () => {
+  let a = parse('a{ align-items: start; color: red; z-index: 1 }')
+  let declA = (a.first as Rule).nodes[0];
+  let declC = (a.first as Rule).nodes[2];
+  declC.before(declA);
+
+  is(a.toString(), 'a{ color: red; align-items: start; z-index: 1 }')
+})
+
+test('insertBefore() receives pre-existing child node - b', () => {
+  let a = parse('a{ align-items: start; color: red; z-index: 1 }')
+  let declA = (a.first as Rule).nodes[0];
+  let declC = (a.first as Rule).nodes[2];
+  declA.before(declC);
+
+  is(a.toString(), 'a{ z-index: 1; align-items: start; color: red }')
+})
+
+test('insertBefore() has defined way of adding newlines', () => {
+  let root = parse('a {}')
+  root.insertBefore(root.first as Rule, 'b {}')
+  root.insertBefore(root.first as Rule, 'c {}')
+  is(root.toString(), 'c {}\nb {}\na {}')
+
+  root = parse('other {}a {}')
+  root.insertBefore(root.first as Rule, 'b {}')
+  root.insertBefore(root.first as Rule, 'c {}')
+  is(root.toString(), 'c {}b {}other {}a {}')
+
+  root = parse('other {}\na {}')
+  root.insertBefore(root.nodes[1] as Rule, 'b {}')
+  root.insertBefore(root.nodes[1] as Rule, 'c {}')
+  is(root.toString(), 'other {}\nc {}\nb {}\na {}')
+
+  root = parse('other {}a {}')
+  root.insertBefore(root.nodes[1] as Rule, 'b {}')
+  root.insertBefore(root.nodes[1] as Rule, 'c {}')
+  is(root.toString(), 'other {}c {}b {}a {}')
+})
+
 test('insertAfter() inserts child', () => {
   let rule = parse('a { a: 1; b: 2 }').first as Rule
   rule.insertAfter(0, { prop: 'c', value: '3' })
@@ -664,6 +704,24 @@ test('insertAfter() receives array', () => {
 
   aRule.insertAfter(0, bRule.nodes)
   is(a.toString(), 'a{ color: red; width: 1; height: 2; z-index: 1 }')
+})
+
+test('insertAfter() receives pre-existing child node - a', () => {
+  let a = parse('a{ align-items: start; color: red; z-index: 1 }')
+  let declA = (a.first as Rule).nodes[0];
+  let declC = (a.first as Rule).nodes[2];
+  declC.after(declA);
+
+  is(a.toString(), 'a{ color: red; z-index: 1; align-items: start }')
+})
+
+test('insertAfter() receives pre-existing child node - b', () => {
+  let a = parse('a{ align-items: start; color: red; z-index: 1 }')
+  let declA = (a.first as Rule).nodes[0];
+  let declC = (a.first as Rule).nodes[2];
+  declA.after(declC);
+
+  is(a.toString(), 'a{ align-items: start; z-index: 1; color: red }')
 })
 
 test('removeChild() removes by index', () => {
@@ -812,6 +870,33 @@ test('allows to clone nodes', () => {
   let root2 = new Root({ nodes: root1.nodes })
   is(root1.toString(), 'a { color: black; z-index: 1 } b {}')
   is(root2.toString(), 'a { color: black; z-index: 1 } b {}')
+})
+
+test('container.nodes can be sorted', () => {
+  let root = parse('@b; @c; @a;')
+  let b = root.nodes[0];
+
+  root.nodes.sort((x, y) => {
+    return (x as AtRule).name.localeCompare((y as AtRule).name)
+  })
+
+  // Sorted nodes are reflected in "toString".
+  is(root.toString(), ' @a;@b; @c;')
+
+  // Sorted nodes are reflected in "walk".
+  let result: string[] = [];
+  root.walkAtRules((atRule) => {
+    result.push(atRule.name.trim())
+  });
+
+  is(result.join(' '), 'a b c')
+
+  // Sorted nodes have the corect "index".
+  is(root.index(b), 1)
+
+  // Inserting after a sorted node results in the correct order.
+  b.after('@d;');
+  is(root.toString(), ' @a;@b;@d; @c;')
 })
 
 test.run()

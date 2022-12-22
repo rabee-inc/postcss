@@ -1,6 +1,28 @@
 # Change Log
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## 8.4.20
+* Fixed source map generation for childless at-rules like `@layer`.
+
+## 8.4.19
+* Fixed whitespace preserving after AST transformations (by Romain Menke).
+
+## 8.4.18
+* Fixed an error on `absolute: true` with empty `sourceContent` (by Rene Haas).
+
+## 8.4.17
+* Fixed `Node.before()` unexpected behavior (by Romain Menke).
+* Added TOC to docs (by Mikhail Dedov).
+
+## 8.4.16
+* Fixed `Root` AST migration.
+
+## 8.4.15
+* Fixed AST normalization after using custom parser with old PostCSS AST.
+
+## 8.4.14
+* Print “old plugin API” warning only if plugin was used (by @zardoy).
+
 ## 8.4.13
 * Fixed `append()` error after using `.parent` (by Jordan Pittman).
 

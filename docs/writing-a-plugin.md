@@ -1,5 +1,15 @@
 # Writing a PostCSS Plugin
 
+**Table of Contents**
+
+* [Links](#links)
+* [Step 1: Create an idea](#step-1-create-an-idea)
+* [Step 2: Create a project](#step-2-create-a-project)
+* [Step 3: Find nodes](#step-3-find-nodes)
+* [Step 4: Change nodes](#step-4-change-nodes)
+* [Step 5: Fight with frustration](#step-5-fight-with-frustration)
+* [Step 6: Make it public](#step-6-make-it-public)
+
 ## Links
 
 Documentation:
@@ -97,7 +107,7 @@ module.exports.postcss = true
 
 [PostCSS plugin boilerplate]: https://github.com/postcss/postcss-plugin-boilerplate/
 [our Sharec config]: https://github.com/postcss/postcss-sharec-config
-[plugin template]: https://github.com/postcss/postcss-plugin-boilerplate/blob/main/index.js
+[plugin template]: https://github.com/postcss/postcss-plugin-boilerplate/blob/main/template/index.t.js
 
 
 ## Step 3: Find nodes

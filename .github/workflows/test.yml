@@ -4,6 +4,8 @@ on:
     branches:
       - main
   pull_request:
+permissions:
+  contents: read
 jobs:
   full:
     name: Node.js Latest Full
@@ -18,22 +20,20 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 19
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Run tests
         run: pnpm test
-        env:
-          FORCE_COLOR: 2
   short:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version:
+          - 18
           - 16
           - 14
-          - 12
     name: Node.js ${{ matrix.node-version }} Quick
     steps:
       - name: Checkout the repository
@@ -50,12 +50,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Run unit tests
-        run: pnpm unit
-        env:
-          FORCE_COLOR: 2
+        run: pnpm run unit
   old:
     runs-on: ubuntu-latest
-    name: Node.js 10 Quick
+    strategy:
+      matrix:
+        node-version:
+          - 12
+          - 10
+    name: Node.js ${{ matrix.node-version }} Quick
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -65,16 +68,14 @@ jobs:
           version: 3
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      - name: Install Node.js 10
+      - name: Install Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 10
+          node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Run unit tests
-        run: pnpm unit
-        env:
-          FORCE_COLOR: 2
+        run: pnpm run unit
   windows:
     runs-on: windows-latest
     name: Windows Quick
@@ -93,6 +94,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Run unit tests
-        run: pnpm unit
-        env:
-          FORCE_COLOR: 2
+        run: pnpm run unit
