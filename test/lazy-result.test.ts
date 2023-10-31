@@ -1,6 +1,6 @@
-import { is, equal, type } from 'uvu/assert'
+import { SourceMapGenerator } from 'source-map-js'
 import { test } from 'uvu'
-import mozilla from 'source-map-js'
+import { equal, is, type } from 'uvu/assert'
 
 import LazyResult from '../lib/lazy-result.js'
 import Processor from '../lib/processor.js'
@@ -35,7 +35,7 @@ test('has map only if necessary', () => {
   type(result2.map, 'undefined')
 
   let result3 = new LazyResult(processor, '', { map: { inline: false } })
-  is(result3.map instanceof mozilla.SourceMapGenerator, true)
+  is(result3.map instanceof SourceMapGenerator, true)
 })
 
 test('contains options', () => {

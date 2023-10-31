@@ -1,6 +1,6 @@
 {
   "name": "postcss",
-  "version": "8.4.20",
+  "version": "8.4.31",
   "description": "Tool for transforming styles with JS plugins",
   "engines": {
     "node": "^10 || ^12 || >=14"
@@ -8,8 +8,7 @@
   "exports": {
     ".": {
       "require": "./lib/postcss.js",
-      "import": "./lib/postcss.mjs",
-      "types": "./lib/postcss.d.ts"
+      "import": "./lib/postcss.mjs"
     },
     "./lib/at-rule": "./lib/at-rule.js",
     "./lib/comment": "./lib/comment.js",
@@ -54,8 +53,14 @@
     "transpiler"
   ],
   "scripts": {
-    "test": "c8 pnpm unit && eslint . && node ./test/version.js && check-dts && node ./test/integration.js && size-limit",
-    "unit": "uvu -r ts-node/register/transpile-only test \"\\.test\\.(ts|js)$\""
+    "test:types": "check-dts",
+    "test:version": "node ./test/version.js",
+    "test:coverage": "c8 pnpm unit",
+    "test:integration": "node ./test/integration.js",
+    "test:size": "size-limit",
+    "test": "FORCE_COLOR=1 pnpm run /^test:/",
+    "unit": "uvu -r ts-node/register/transpile-only test \"\\.test\\.(ts|js)$\"",
+    "old": "uvu -r ../../../../../../../test/old-node.js -r ts-node/register/transpile-only test \"\\.test\\.(ts|js)$\""
   },
   "funding": [
     {
@@ -65,6 +70,10 @@
     {
       "type": "tidelift",
       "url": "https://tidelift.com/funding/github/npm/postcss"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/ai"
     }
   ],
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
@@ -75,36 +84,35 @@
     "url": "https://github.com/postcss/postcss/issues"
   },
   "dependencies": {
-    "nanoid": "^3.3.4",
+    "nanoid": "^3.3.6",
     "picocolors": "^1.0.0",
     "source-map-js": "^1.0.2"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^48.0.0",
-    "@size-limit/preset-small-lib": "^8.1.0",
-    "@types/fs-extra": "^9.0.13",
-    "@types/node": "^18.11.13",
-    "@typescript-eslint/eslint-plugin": "^5.46.0",
-    "@typescript-eslint/parser": "^5.46.0",
-    "c8": "^7.12.0",
-    "check-dts": "^0.6.7",
-    "clean-publish": "^4.0.2",
+    "@logux/eslint-config": "^52.0.1",
+    "@size-limit/preset-small-lib": "^9.0.0",
+    "@types/node": "^20.8.3",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "c8": "^8.0.1",
+    "check-dts": "^0.7.2",
+    "clean-publish": "^4.2.0",
     "concat-with-sourcemaps": "^1.1.0",
-    "eslint": "^8.29.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.6.0",
+    "eslint": "^8.51.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-perfectionist": "^2.1.0",
     "eslint-plugin-prefer-let": "^3.0.1",
     "eslint-plugin-promise": "^6.1.1",
-    "fs-extra": "^11.1.0",
     "nanodelay": "^1.0.8",
-    "nanospy": "^0.5.0",
-    "postcss-parser-tests": "^8.5.2",
-    "simple-git-hooks": "^2.8.1",
-    "size-limit": "^8.1.0",
+    "nanospy": "^1.0.0",
+    "postcss-parser-tests": "^8.8.0",
+    "simple-git-hooks": "^2.9.0",
+    "size-limit": "^9.0.0",
     "strip-ansi": "^6.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.4",
+    "typescript": "^5.2.2",
     "uvu": "^0.5.6"
   },
   "c8": {
@@ -143,11 +151,21 @@
   "eslintConfig": {
     "extends": "@logux/eslint-config/ts",
     "rules": {
+      "@typescript-eslint/consistent-type-imports": "off",
       "@typescript-eslint/no-explicit-any": "off",
+      "node-import/prefer-node-protocol": "off",
       "consistent-return": "off",
       "global-require": "off"
     },
     "overrides": [
+      {
+        "files": [
+          "*.d.ts"
+        ],
+        "rules": {
+          "@typescript-eslint/no-redeclare": "off"
+        }
+      },
       {
         "files": [
           "*.test.*"

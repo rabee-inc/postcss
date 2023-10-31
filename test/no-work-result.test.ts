@@ -1,7 +1,7 @@
-import { is, type, equal, throws, not, instance } from 'uvu/assert'
-import { test } from 'uvu'
-import mozilla from 'source-map-js'
 import { spy } from 'nanospy'
+import { SourceMapGenerator } from 'source-map-js'
+import { test } from 'uvu'
+import { equal, instance, is, not, throws, type } from 'uvu/assert'
 
 import NoWorkResult from '../lib/no-work-result.js'
 import Processor from '../lib/processor.js'
@@ -70,7 +70,7 @@ test('has map only if necessary', () => {
     from: '/a.css',
     map: { inline: false }
   })
-  is(result3.map instanceof mozilla.SourceMapGenerator, true)
+  is(result3.map instanceof SourceMapGenerator, true)
 })
 
 test('contains simple properties', () => {

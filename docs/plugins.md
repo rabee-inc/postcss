@@ -4,7 +4,6 @@
 
 * [Control](#control)
 * [Packs](#packs)
-* [Control](#control)
 * [Future CSS Syntax](#future-css-syntax)
 * [Fallbacks](#fallbacks)
 * [Language Extensions](#language-extensions)
@@ -16,7 +15,7 @@
 * [Analysis](#analysis)
 * [Reporters](#reporters)
 * [Fun](#fun)
- 
+
 ## Control
 
 There are two ways to make PostCSS magic more explicit.
@@ -176,6 +175,8 @@ by one line of code.
   variables.
 * [`webp-in-css`] to use WebP background images in CSS.
 * [`postcss-clamp`] transform `clamp()` to combination of `min/max`
+* [`postcss-spring-easing`] replaces `spring()` with a resulting `linear()`
+  function and add a `--spring-duration` css variable.
 
 See also [`oldie`] plugins pack.
 
@@ -334,6 +335,7 @@ loosely resembles the original.
 * [`postcss-unicode-characters`] makes it easier to write `unicode-range`
   descriptors.
 * [`postcss-url`] rebases or inlines `url()`s.
+* [`postcss-urlrebase`] rebases `url()`s to a given root URL.
 * [`postcss-urlrev`] adds MD5 hash strings to `url()`s.
 * [`postcss-write-svg`] write inline SVGs in CSS.
 * [`postcss-inline-svg`] inline SVG images and customize their styles.
@@ -547,6 +549,7 @@ See also plugins in modular minifier [`cssnano`].
   expressed in JS or JSON, within CSS.
 * [`postcss-pixel-to-remvw`] converting px to both of rem and vw, also one of them
 * [`postcss-easy-import`] inline `@import` rules content with extra features.
+* [`postcss-plugin-ignore-file`] ignore file with a top-comment `/* @ignore */`.
 
 
 [flexbox bugs]: https://github.com/philipwalton/flexbugs
@@ -834,6 +837,7 @@ See also plugins in modular minifier [`cssnano`].
 [`postcss-nested`]:                       https://github.com/postcss/postcss-nested
 [`postcss-rtlcss`]:                       https://github.com/elchininet/postcss-rtlcss
 [`postcss-select`]:                       https://github.com/johnotander/postcss-select
+[`postcss-urlrebase`]:                    https://github.com/strarsis/postcss-urlrebase
 [`postcss-urlrev`]:                       https://github.com/yuezk/postcss-urlrev
 [`postcss-zindex`]:                       https://github.com/ben-eb/postcss-zindex
 [`list-selectors`]:                       https://github.com/davidtheclark/list-selectors
@@ -950,3 +954,5 @@ See also plugins in modular minifier [`cssnano`].
 [`postcss-pixel-to-remvw`]:               https://github.com/ben-lau/postcss-pixel-to-remvw
 [`@csstools/postcss-design-tokens`]:      https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-design-tokens
 [`postcss-easy-import`]:                  https://github.com/TrySound/postcss-easy-import
+[`postcss-spring-easing`]:                https://github.com/okikio/postcss-spring-easing
+[`postcss-plugin-ignore-file`]:           https://github.com/RiadhAdrani/postcss-plugin-ignore-file

@@ -1,6 +1,42 @@
 # Change Log
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## 8.4.31
+* Fixed `\r` parsing to fix CVE-2023-44270.
+
+## 8.4.30
+* Improved source map performance (by Romain Menke).
+
+## 8.4.29
+* Fixed `Node#source.offset` (by Ido Rosenthal).
+* Fixed docs (by Christian Oliff).
+
+## 8.4.28
+* Fixed `Root.source.end` for better source map (by Romain Menke).
+* Fixed `Result.root` types when `process()` has no parser.
+
+## 8.4.27
+* Fixed `Container` clone methods types.
+
+## 8.4.26
+* Fixed clone methods types.
+
+## 8.4.25
+* Improve stringify performance (by Romain Menke).
+* Fixed docs (by @vikaskaliramna07).
+
+## 8.4.24
+* Fixed `Plugin` types.
+
+## 8.4.23
+* Fixed warnings in TypeDoc.
+
+## 8.4.22
+* Fixed TypeScript support with `node16` (by Remco Haszing).
+
+## 8.4.21
+* Fixed `Input#error` types (by Aleks Hudochenkov).
+
 ## 8.4.20
 * Fixed source map generation for childless at-rules like `@layer`.
 

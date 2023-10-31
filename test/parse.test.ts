@@ -1,10 +1,10 @@
-import { equal, is, match, not, throws } from 'uvu/assert'
-import { testPath, jsonify, eachTest } from 'postcss-parser-tests'
 import { readFileSync } from 'fs'
 import { resolve } from 'path'
+import { eachTest, jsonify, testPath } from 'postcss-parser-tests'
 import { test } from 'uvu'
+import { equal, is, match, not, throws } from 'uvu/assert'
 
-import { Declaration, AtRule, parse, Root, Rule } from '../lib/postcss.js'
+import { AtRule, Declaration, parse, Root, Rule } from '../lib/postcss.js'
 
 test('works with file reads', () => {
   let stream = readFileSync(testPath('atrule-empty.css'))
@@ -15,7 +15,7 @@ eachTest((name, css, json) => {
   test(`parses ${name}`, () => {
     css = css.replace(/\r\n/g, '\n')
     let parsed = jsonify(parse(css, { from: name }))
-    equal(JSON.parse(parsed), JSON.parse(json))
+    equal(parsed, json)
   })
 })
 
@@ -32,6 +32,12 @@ test('should has true at hasBOM property', () => {
 test('should has false at hasBOM property', () => {
   let css = parse('@host { a {\f} }')
   is(css.first?.source?.input.hasBOM, false)
+})
+
+test('parses carrier return', () => {
+  throws(() => {
+    parse('@font-face{ font:(\r/*);} body { a: "a*/)} a{}"}')
+  }, /:1:46: Unclosed string/)
 })
 
 test('saves source file', () => {
@@ -102,6 +108,22 @@ test('parses double semicolon after rule', () => {
   is(parse('a { };;').toString(), 'a { };;')
 })
 
+test('parses a functional property', () => {
+  let root = parse('a { b(c): d }')
+  let a = root.first as Rule
+  let b = a.first as Declaration
+
+  is(b.prop, 'b(c)')
+})
+
+test('parses a functional tagname', () => {
+  let root = parse('a { b(c): d {} }')
+  let a = root.first as Rule
+  let b = a.first as Rule
+
+  is(b.selector, 'b(c): d')
+})
+
 test('throws on unclosed blocks', () => {
   throws(() => {
     parse('\na {\n')
@@ -138,6 +160,9 @@ test('throws on property without value', () => {
   }, /:1:5: Unknown word/)
   throws(() => {
     parse('a { b b }')
+  }, /:1:5: Unknown word/)
+  throws(() => {
+    parse('a { b(); }')
   }, /:1:5: Unknown word/)
 })
 

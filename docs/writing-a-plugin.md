@@ -21,7 +21,7 @@ Documentation:
 
 Support:
 
-* [Ask questions](https://gitter.im/postcss/postcss)
+* [Ask questions](https://github.com/orgs/postcss/discussions)
 * [PostCSS twitter](https://twitter.com/postcss) with latest updates.
 
 
@@ -90,10 +90,6 @@ For public plugins:
 2. Create a repository on GitHub or GitLab.
 3. Publish your code there.
 
-You can also use [our Sharec config] to keep the best practices up to date.
-Every time when you will update the config, it will update development configs
-and development tools.
-
 ```js
 module.exports = (opts = {}) => {
   // Plugin creator to check options or prepare caches
@@ -106,7 +102,6 @@ module.exports.postcss = true
 ```
 
 [PostCSS plugin boilerplate]: https://github.com/postcss/postcss-plugin-boilerplate/
-[our Sharec config]: https://github.com/postcss/postcss-sharec-config
 [plugin template]: https://github.com/postcss/postcss-plugin-boilerplate/blob/main/template/index.t.js
 
 
@@ -385,7 +380,8 @@ You will have bugs and a minimum of 10 minutes in debugging even a simple plugin
 You may found that simple origin idea will not work in real-world and you need
 to change everything.
 
-Don’t worry. Every bug is findable, and finding another solution may make your plugin even better.
+Don’t worry. Every bug is findable, and finding another solution may make your
+plugin even better.
 
 Start from writing tests. Plugin boilerplate has a test template
 in `index.test.js`. Call `npx jest` to test your plugin.
@@ -394,7 +390,7 @@ Use Node.js debugger in your text editor or just `console.log`
 to debug the code.
 
 PostCSS community can help you since we are all experiencing the same problems.
-Don’t afraid to ask in [special Gitter channel](https://gitter.im/postcss/).
+Don’t afraid to ask in [special channel](https://github.com/orgs/postcss/discussions).
 
 
 ## Step 6: Make it public
@@ -412,4 +408,3 @@ We will help you with marketing.
 [Add your new plugin]: https://github.com/himynameisdave/postcss-plugins#submitting-a-new-plugin
 [`clean-publish`]: https://github.com/shashkovdanil/clean-publish/
 [`@postcss`]: https://twitter.com/postcss
-[our chat]: https://gitter.im/postcss/
