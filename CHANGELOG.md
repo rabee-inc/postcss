@@ -1,6 +1,30 @@
 # Change Log
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## 8.4.38
+* Fixed `endIndex: 0` in errors and warnings (by @romainmenke).
+
+## 8.4.37
+* Fixed `original.column are not numbers` error in another case.
+
+## 8.4.36
+* Fixed `original.column are not numbers` error on broken previous source map.
+
+## 8.4.35
+* Avoid `!` in `node.parent.nodes` type.
+* Allow to pass `undefined` to node adding method to simplify types.
+
+## 8.4.34
+* Fixed `AtRule#nodes` type (by Tim Weißenfels).
+* Cleaned up code (by Dmitry Kirillov).
+
+## 8.4.33
+* Fixed `NoWorkResult` behavior difference with normal mode (by Romain Menke).
+* Fixed `NoWorkResult` usage conditions (by @ahmdammarr).
+
+## 8.4.32
+* Fixed `postcss().process()` types (by Andrew Ferreira).
+
 ## 8.4.31
 * Fixed `\r` parsing to fix CVE-2023-44270.
 
